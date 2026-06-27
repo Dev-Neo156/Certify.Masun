@@ -15,7 +15,7 @@ function VerifyContent() {
   const MAX_ID_LENGTH = 64;
   const CERT_ID_PATTERN = /^[A-Z0-9-]+$/;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = certificateId.trim().toUpperCase();
     if (!trimmed) return;
@@ -29,7 +29,40 @@ function VerifyContent() {
     }
     setInputError('');
     setIsVerifying(true);
-    router.push(`/certificate/${encodeURIComponent(trimmed)}`);
+
+    try {
+      const res = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ certificateId: trimmed }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 429) {
+        setInputError(data.error || 'Too many requests. Please try again later.');
+        setIsVerifying(false);
+        return;
+      }
+
+      if (res.status === 404) {
+        setInputError(data.error || 'Certificate not found. Please check your ID.');
+        setIsVerifying(false);
+        return;
+      }
+
+      if (!res.ok) {
+        setInputError(data.error || 'An unexpected error occurred. Please try again.');
+        setIsVerifying(false);
+        return;
+      }
+
+      // Certificate found — navigate to the detail page
+      router.push(`/certificate/${encodeURIComponent(data.certificateId)}`);
+    } catch {
+      setInputError('Network error. Please check your connection and try again.');
+      setIsVerifying(false);
+    }
   }
 
   return (
@@ -66,6 +99,9 @@ function VerifyContent() {
         <section style={{ padding: '0 0 4rem', position: 'relative', zIndex: 1 }}>
           <div className="verify-container">
             <form className="verify-form" onSubmit={handleSubmit}>
+              <label htmlFor="verify-input" className="sr-only">
+                Certificate ID
+              </label>
               <input
                 type="text"
                 className="form-input"
@@ -73,9 +109,14 @@ function VerifyContent() {
                 value={certificateId}
                 onChange={(e) => setCertificateId(e.target.value)}
                 id="verify-input"
+                aria-label="Certificate ID"
+                disabled={isVerifying}
               />
               {inputError && (
-                <p style={{ color: 'var(--red)', fontSize: '0.8rem', marginTop: '0.4rem', textAlign: 'center' }}>
+                <p
+                  role="alert"
+                  style={{ color: 'var(--red)', fontSize: '0.8rem', marginTop: '0.4rem', textAlign: 'center' }}
+                >
                   {inputError}
                 </p>
               )}
@@ -85,7 +126,25 @@ function VerifyContent() {
                 disabled={!certificateId.trim() || isVerifying}
                 id="verify-button"
               >
-                {isVerifying ? 'Verifying...' : 'Verify'}
+                {isVerifying ? (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <svg
+                      className="verify-spinner"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    >
+                      <path d="M12 2a10 10 0 0 1 10 10" />
+                    </svg>
+                    Verifying…
+                  </span>
+                ) : (
+                  'Verify'
+                )}
               </button>
             </form>
           </div>

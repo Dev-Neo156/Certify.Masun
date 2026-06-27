@@ -20,13 +20,13 @@ export default function Footer() {
             <a href="https://www.masun.in" target="_blank" rel="noopener noreferrer">
               About Us
             </a>
-            <a href="https://masun.in/#contact" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.masun.in/#contact" target="_blank" rel="noopener noreferrer">
               Contact
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); setModal('privacy'); }}>
+            <a href="/privacy" onClick={(e) => { e.preventDefault(); setModal('privacy'); }}>
               Privacy Policies
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); setModal('terms'); }}>
+            <a href="/terms" onClick={(e) => { e.preventDefault(); setModal('terms'); }}>
               Terms of Service
             </a>
           </div>

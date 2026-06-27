@@ -106,7 +106,7 @@ export default function Navbar() {
         ))}
         {/* Mobile legal links */}
         <a
-          href="#"
+          href="/privacy"
           onClick={(e) => {
             e.preventDefault();
             setMobileOpen(false);
@@ -117,7 +117,7 @@ export default function Navbar() {
           Privacy Policies
         </a>
         <a
-          href="#"
+          href="/terms"
           onClick={(e) => {
             e.preventDefault();
             setMobileOpen(false);
