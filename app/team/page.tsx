@@ -6,38 +6,45 @@ import Footer from '@/components/Footer';
 
 const teamMembers = [
   {
-    name: 'Anjika Santra',
-    role: 'QA Tester',
-    image: '/team/WhatsApp Image 2026-05-11 at 1.33.26 AM.jpeg',
-  },
-  {
-    name: 'Aditya Kumar Kisan',
-    role: 'Lead UI/UX Designer',
-    image: '/team/WhatsApp Image 2026-05-11 at 1.46.38 AM.jpeg',
+    name: 'Manish Debnath',
+    role: 'Founder & CEO',
+    description: 'Leading the vision and operations to deliver transformative digital products.',
+    image: '/team/WhatsApp Image 2026-05-11 at 1.33.26 AM (1).jpeg',
   },
   {
     name: 'Suraj Nath',
     role: 'Co-Founder',
+    description: 'Driving technical strategy and engineering scalable architectural solutions.',
     image: '/team/WhatsApp Image 2026-05-11 at 1.33.26 AM (2).jpeg',
-  },
-  {
-    name: 'Manish Debnath',
-    role: 'Founder & CEO',
-    image: '/team/WhatsApp Image 2026-05-11 at 1.33.26 AM (1).jpeg',
   },
   {
     name: 'Deep Ball',
     role: 'CTO',
+    description: 'Overseeing the technology stack and driving innovative engineering practices.',
     image: '/team/WhatsApp Image 2026-05-11 at 1.34.37 AM.jpeg',
   },
   {
     name: 'Arka Bisai',
     role: 'CIO',
+    description: 'Managing information strategy and ensuring robust data security protocols.',
     image: '/team/WhatsApp Image 2026-05-11 at 1.37.10 AM.jpeg',
   },
   {
+    name: 'Aditya Kumar Kisan',
+    role: 'Lead UI/UX Designer',
+    description: 'Crafting intuitive, premium user experiences and stunning visual identities.',
+    image: '/team/WhatsApp Image 2026-05-11 at 1.46.38 AM.jpeg',
+  },
+  {
+    name: 'Anjika Santra',
+    role: 'QA Tester',
+    description: 'Ensuring flawless quality and hunting down bugs before they reach our users.',
+    image: '/team/WhatsApp Image 2026-05-11 at 1.33.26 AM.jpeg',
+  },
+  {
     name: 'Prakruti Parimita Rath',
-    role: 'Social Media Director',
+    role: 'QA Tester',
+    description: 'Rigorous testing and quality assurance to guarantee flawless performance.',
     image: '/team/WhatsApp Image 2026-05-11 at 1.33.25 AM (1).jpeg',
   },
 ];
@@ -100,64 +107,20 @@ export default function TeamPage() {
           </div>
         </section>
 
-        {/* Team Slider */}
-        <section style={{ padding: '0 0 5rem', position: 'relative', zIndex: 10 }}>
-          {/* Desktop Accordion */}
-          <div className="team-desktop-container">
-            {teamMembers.map((member, idx) => {
-              const isActive = idx === activeIdx;
-              return (
-                <div
-                  key={member.name}
-                  className={`team-accordion-item ${isActive ? 'active' : ''}`}
-                  style={{ width: isActive ? '28rem' : '5rem' }}
-                  onMouseEnter={() => setActiveIdx(idx)}
-                >
-                  <img src={member.image} alt={member.name} className="team-accordion-img" />
-                  <div className="team-accordion-overlay">
-                    <div className="team-accordion-text">
-                      <h4 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 500, margin: 0, whiteSpace: 'nowrap' }}>
-                        {member.name}
-                      </h4>
-                      <p style={{ color: 'var(--masun-lime)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', margin: '4px 0 0', whiteSpace: 'nowrap' }}>
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
+        {/* Team Grid */}
+        <section className="features">
+          <div className="features-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            {teamMembers.map((member, idx) => (
+              <div key={member.name} className="masun-card" style={{ aspectRatio: '3/4' }}>
+                <img src={member.image} alt={member.name} className="masun-card-img" />
+                <div className="masun-card-overlay"></div>
+                <div className="masun-card-badge">{member.role}</div>
+                <div className="masun-card-content">
+                  <h3 className="masun-card-title">{member.name}</h3>
+                  <p className="masun-card-desc">{member.description}</p>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Mobile Carousel */}
-          <div className="team-mobile-container">
-            <button className="team-carousel-btn left" onClick={scrollLeft}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button className="team-carousel-btn right" onClick={scrollRight}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
-            
-            <div className="team-carousel" ref={scrollRef}>
-              {teamMembers.map((member) => (
-                <div key={member.name} className="team-carousel-item">
-                  <img src={member.image} alt={member.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div className="team-carousel-overlay" />
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem', zIndex: 20, pointerEvents: 'none' }}>
-                    <h4 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.05em', margin: '0 0 4px' }}>
-                      {member.name}
-                    </h4>
-                    <p style={{ color: 'var(--masun-lime)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>
-                      {member.role}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </section>
       </main>

@@ -2,6 +2,7 @@ import { getCertificateById } from '@/lib/certificates';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import CertToolbar from '@/components/CertToolbar';
+import PdfViewer from '@/components/PdfViewer';
 
 export const dynamic = 'force-dynamic';
 
@@ -88,11 +89,7 @@ export default async function CertificatePage({ params }: { params: Promise<{ id
 
       {/* ── Full-height PDF viewer ── */}
       <div className="cert-viewer-wrap">
-        <iframe
-          src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-          title={`Certificate ${certificate.certificate_id}`}
-          className="cert-iframe"
-        />
+        <PdfViewer url={pdfUrl} />
 
         {/* Verified badge — bottom-right corner of iframe */}
         <div className="cert-verified-badge" aria-label="Verified authentic document">

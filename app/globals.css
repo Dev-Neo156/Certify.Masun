@@ -1871,6 +1871,121 @@ textarea.form-input {
 }
 
 /* ============================================
+   MASUN.IN CARD DESIGN SYSTEM
+   ============================================ */
+.masun-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.masun-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.masun-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.8s ease;
+}
+
+.masun-card:hover .masun-card-img {
+  transform: scale(1.08);
+}
+
+.masun-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(5, 5, 8, 1) 0%, rgba(5, 5, 8, 0.6) 40%, rgba(5, 5, 8, 0) 100%);
+  transition: opacity 0.4s ease;
+}
+
+.masun-card:hover .masun-card-overlay {
+  background: linear-gradient(to top, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.7) 60%, rgba(5, 5, 8, 0.2) 100%);
+}
+
+.masun-card-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 3;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  background: var(--masun-lime);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg-primary);
+  box-shadow: 0 4px 15px rgba(212, 255, 0, 0.3);
+}
+
+.masun-card-content {
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.masun-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.masun-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.masun-card:hover .masun-card-desc {
+  opacity: 1;
+  max-height: 100px;
+  transform: translateY(0);
+}
+
+/* Specific aspect ratio overrides */
+.masun-card-landscape {
+  aspect-ratio: 16 / 10;
+}
+@media (max-width: 768px) {
+  .masun-card-landscape {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ============================================
    CERTIFICATE VIEW PAGE — mobile-first layout
    ============================================ */
 
@@ -1896,7 +2011,7 @@ textarea.form-input {
   font-size: 0.85rem;
 }
 
-/* iframe wrapper fills remaining viewport below navbar + toolbar */
+/* iframe / react-pdf wrapper fills remaining viewport below navbar + toolbar */
 .cert-viewer-wrap {
   position: fixed;
   top: 120px; /* navbar(70) + toolbar(~50) */
@@ -1904,6 +2019,24 @@ textarea.form-input {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  background: #101015; /* darker bg to contrast the certificate */
+}
+
+/* styles for react-pdf image rendering */
+.pdf-viewer-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1.5rem 6rem; /* extra bottom padding so badge doesn't cover content */
+}
+
+.cert-pdf-page canvas {
+  max-width: 100%;
+  height: auto !important;
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .cert-iframe {

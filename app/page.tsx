@@ -92,37 +92,31 @@ function VerifyContent() {
         {/* Features Section */}
         <section className="features">
           <div className="features-grid">
-            <div className="glass-card feature-card">
-              <div className="feature-icon">
-                <img src="/security-tamper.png" alt="Tamper-Proof Security" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+            <div className="masun-card masun-card-landscape">
+              <img src="/security-tamper.png" alt="Tamper-Proof" className="masun-card-img" />
+              <div className="masun-card-overlay"></div>
+              <div className="masun-card-content">
+                <h3 className="masun-card-title">Tamper-Proof Security</h3>
+                <p className="masun-card-desc">Each certificate has a unique ID stored securely. Verification is instant and reliable.</p>
               </div>
-              <h3>Tamper-Proof Security</h3>
-              <p>
-                Each certificate has a unique ID stored securely.
-                Verification is instant and reliable.
-              </p>
             </div>
 
-            <div className="glass-card feature-card">
-              <div className="feature-icon">
-                <img src="/security-instant.png" alt="Instant Verification" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+            <div className="masun-card masun-card-landscape">
+              <img src="/security-instant.png" alt="Instant Verify" className="masun-card-img" />
+              <div className="masun-card-overlay"></div>
+              <div className="masun-card-content">
+                <h3 className="masun-card-title">Instant Verification</h3>
+                <p className="masun-card-desc">Enter a certificate ID and get instant results. No account needed — fully public and transparent.</p>
               </div>
-              <h3>Instant Verification</h3>
-              <p>
-                Enter a certificate ID and get instant results.
-                No account needed — fully public and transparent.
-              </p>
             </div>
 
-            <div className="glass-card feature-card">
-              <div className="feature-icon">
-                <img src="/security-trusted.png" alt="Trusted Platform" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+            <div className="masun-card masun-card-landscape">
+              <img src="/security-trusted.png" alt="Trusted" className="masun-card-img" />
+              <div className="masun-card-overlay"></div>
+              <div className="masun-card-content">
+                <h3 className="masun-card-title">Trusted Platform</h3>
+                <p className="masun-card-desc">Powered by Masun Technology — a trusted name in software development and tech education.</p>
               </div>
-              <h3>Trusted Platform</h3>
-              <p>
-                Powered by Masun Technology — a trusted name in
-                software development and tech education.
-              </p>
             </div>
           </div>
         </section>
