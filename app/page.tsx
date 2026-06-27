@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 function VerifyContent() {
   const [certificateId, setCertificateId] = useState('');
   const [inputError, setInputError] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
   const router = useRouter();
 
   const MAX_ID_LENGTH = 64;
@@ -27,6 +28,7 @@ function VerifyContent() {
       return;
     }
     setInputError('');
+    setIsVerifying(true);
     router.push(`/certificate/${encodeURIComponent(trimmed)}`);
   }
 
@@ -80,10 +82,10 @@ function VerifyContent() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={!certificateId.trim()}
+                disabled={!certificateId.trim() || isVerifying}
                 id="verify-button"
               >
-                Verify
+                {isVerifying ? 'Verifying...' : 'Verify'}
               </button>
             </form>
           </div>
